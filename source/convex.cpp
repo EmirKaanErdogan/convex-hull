@@ -179,39 +179,6 @@ int get_position(const vector<double> line ,const vector <City*> city, int index
     }
 }
 
-string detect_cases(vector <double> line ,vector <City*> idx_hull, int index){
-
-    idx_hull[index%idx_hull.size()]->print_object();
-    for(int i=0;i<idx_hull.size();i++){
-        idx_hull[i]->print_object();
-    }
-    int position_next = get_position( line,idx_hull,( (index+1) %idx_hull.size() )) ;
-    int position_prev = get_position(line,idx_hull,( (index-1+idx_hull.size()) %idx_hull.size() ) ); 
-    if(position_next >=0 && (position_prev <=0) )
-    {
-        // next is above, prev is below, select next as pivot. 
-        //cout<<"next"<<endl ;
-        return "next"; 
-    }
-    else if ((position_next>=0) && (position_prev>=0) )
-    {
-        // both are above ; 
-        //cout<<"Both are above "<<endl ; 
-        return "lower_tangent"; 
-    }
-    else if ((position_next <=0 ) && (position_prev>=0))
-    {
-        // next is below, prev is above, select prev as pivot 
-        //cout<<"Prev is above"<<endl ; 
-        return "prev"; 
-    }
-    else if ((position_next <=0 ) &&(position_prev <=0) )
-    {
-        // both are below 
-        return "upper_tangent"; 
-    }
-    return "EXIT_SUCCESS" ; 
-}
 // function to find the right most index of the vector 
 
 int find_right_most_index(const vector <City*> idx_hull){
